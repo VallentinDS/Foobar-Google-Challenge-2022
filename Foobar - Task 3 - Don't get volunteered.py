@@ -95,5 +95,3 @@ def solution(s, d):
         return -1
     
     return count_moves(s_coord, d_coord)
-
-solution(3, 6)
