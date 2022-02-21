@@ -51,10 +51,10 @@ Output:
 
 """
 
-from math import remainder
-
-
-def array(a, b):
+# I found this one harder to solve as the initial solution that I thought of didn't pass all the hidden test cases. 
+# Anyway, I went on and I googled the XOR operator and XOR regressions in order to understand the bitwise exclusive XOR.
+# As per exercises requests, you will find that when you do bitwise operations (checksum) they have the same proprieties like the normal sum: commutativity.
+# This would help a lot when the numbers would bet bigger
 
 
 # A solution that didn't check for all
@@ -69,3 +69,20 @@ def solution(start, length):
         remaining -= 1
 
     return res
+
+# The solution that solved all the hidden tests, managed to reach it with the help of another developer
+
+def xor(a, b):
+    if(a%2==0):
+        xor_rotation = [b, 1, b+1, 0]
+    else:
+        xor_rotation= [a, a^b, a-1, (a-1)^b]
+    return xor_rotation[(b-a)%4]
+
+def answer(start, length):
+    res=0
+    for i in range(0, length):
+        res ^= xor(start+(length*i), start+(length*i)+(length-i)-1)
+    return res
+
+answer(1,9)
